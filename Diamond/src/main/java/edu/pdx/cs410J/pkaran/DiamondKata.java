@@ -1,5 +1,6 @@
 package edu.pdx.cs410J.pkaran;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,33 +10,40 @@ public class DiamondKata {
 
     public static void main(String[] args) {
         final char letter = 'Z';
-        printPyramid(letter);
+        printDiamond(letter);
     }
 
-    private static void printPyramid(char letter) {
+    private static void printDiamond(char letter) {
         letter = Character.toLowerCase(letter);
 
         final int maxWidth = ALPHABET_LIST.indexOf(letter) + (ALPHABET_LIST.indexOf(letter) + 1);
-        final int maxlength = (ALPHABET_LIST.indexOf(letter) * 2) + 1;
-        final int midPoint = (int) Math.ceil(maxWidth / 2);
-
         assert maxWidth % 2 != 0;
 
-        System.out.println(String.format("maxWidth = %d, maxLength = %d", maxWidth, maxlength));
+        final int midPoint = (int) Math.ceil(maxWidth / 2);
+
+        List<String> lines = new ArrayList<>();
 
         // loop through all letters
         for (int i = 0; i <= ALPHABET_LIST.indexOf(letter); i++) {
             if(i == 0) {
                 char[] whiteSpace = getWhiteSpace(maxWidth);
                 whiteSpace[midPoint] = ALPHABET_LIST.get(i);
-                System.out.println(new String(whiteSpace));
+                lines.add(new String(whiteSpace));
                 continue;
             }
 
             char[] whiteSpace = getWhiteSpace(maxWidth);
             whiteSpace[midPoint - i] = ALPHABET_LIST.get(i);
             whiteSpace[midPoint + i] = ALPHABET_LIST.get(i);
-            System.out.println(new String(whiteSpace));
+            lines.add(new String(whiteSpace));
+        }
+
+        for(String line: lines) {
+            System.out.println(line);
+        }
+
+        for(int i = lines.size() - 2; i >= 0; i--) {
+            System.out.println(lines.get(i));
         }
     }
 
