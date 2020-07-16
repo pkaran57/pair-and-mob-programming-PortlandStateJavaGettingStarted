@@ -9,10 +9,11 @@ public class DiamondKata {
 
     public static void main(String[] args) {
         final char letter = 'Z';
-        printPyramid(Character.toLowerCase(letter));
+        printPyramid(letter);
     }
 
     private static void printPyramid(char letter) {
+        letter = Character.toLowerCase(letter);
 
         final int maxWidth = ALPHABET_LIST.indexOf(letter) + (ALPHABET_LIST.indexOf(letter) + 1);
         final int maxlength = (ALPHABET_LIST.indexOf(letter) * 2) + 1;
