@@ -1,8 +1,6 @@
 package edu.pdx.cs410J.pkaran;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * RPN Calculator
@@ -42,6 +40,24 @@ public class Kata {
         try {
             a = Double.parseDouble(token);
         } catch (Exception e) {
+            if (token.equals("SQRT")) {
+                String numberStr = rpnStack.pop();
+                double number = Double.parseDouble(numberStr);
+                return Math.sqrt(number);
+            }
+
+            if (token.equals("MAX")) {
+                List<Double> doubleList = new ArrayList<>();
+                String nextToken = rpnStack.pop();
+
+                do {
+                    doubleList.add(Double.parseDouble(nextToken));
+                    nextToken = rpnStack.pop();
+                } while (!rpnStack.empty() && isANumber(nextToken));
+
+                return Collections.max(doubleList);
+            }
+
             b = evaluateRPNStack(rpnStack);
             a = evaluateRPNStack(rpnStack);
 
@@ -63,5 +79,14 @@ public class Kata {
             }
         }
         return a;
+    }
+
+    private static boolean isANumber(String token) {
+        try {
+            Double.parseDouble(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
