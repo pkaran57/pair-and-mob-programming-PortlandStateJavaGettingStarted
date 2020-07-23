@@ -50,7 +50,7 @@ public class Kata {
                     a /= b;
                     break;
                 default:
-                    throw new Exception();
+                    throw new Exception("Encountered an error trying to evaluate the token " + token);
             }
         }
         return a;
