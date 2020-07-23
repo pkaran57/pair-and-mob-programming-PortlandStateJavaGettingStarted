@@ -25,6 +25,7 @@ accordingly
 
   <modules>
     <module>Diamond</module>
+    <module>RPNCalculator</module>
   </modules>
 
   <inceptionYear>2020</inceptionYear>
