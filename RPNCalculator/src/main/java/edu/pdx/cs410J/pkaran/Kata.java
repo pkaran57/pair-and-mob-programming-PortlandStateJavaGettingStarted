@@ -15,6 +15,16 @@ public class Kata {
 
     public static void main(String[] args) throws Exception {
         String expression = "3 5 8 * 7 + *";
+
+        System.out.println(calculateRPNExpression(expression));
+    }
+
+    static double calculateRPNExpression(String expression) throws Exception {
+        Stack<String> stack = tokenizeExpression(expression);
+        return evaluateRPNStack(stack);
+    }
+
+    private static Stack<String> tokenizeExpression(String expression) {
         List<String> expressionTokens = Arrays.asList(expression.split(" "));
 
         Stack<String> stack = new Stack<>();
@@ -22,8 +32,7 @@ public class Kata {
         for (String token : expressionTokens) {
             stack.push(token);
         }
-
-        System.out.println(evaluateRPNStack(stack));
+        return stack;
     }
 
     private static double evaluateRPNStack(Stack<String> rpnStack) throws Exception {
